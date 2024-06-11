@@ -29,8 +29,7 @@ jobs:
       run: |
         git config --global user.name 'SholarBot'
         git config --global user.email 'scholarbot@users.noreply.github.com'
-        git fetch origin
-        git checkout -t -b scholar-bot-update
+        git checkout -B scholar-bot-update
         git add .
         git commit -m "Update report"
-        git push origin scholar-bot-update
+        git push origin scholar-bot-update -f
