@@ -4,7 +4,11 @@ on:
     branches: [main]
 
 jobs:
+  push_branch:
+    uses: ./.github/workflows/push_branch.yml
+    
   open_pr:
+      needs: [push_branch]
 
     permissions:
       pull-requests: write
