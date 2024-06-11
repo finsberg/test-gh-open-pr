@@ -9,9 +9,10 @@ jobs:
     
   open_pr:
     needs: [push_branch]
-    
+
     permissions:
       pull-requests: write
+      contents: write
 
     runs-on: ubuntu-latest
     steps:
