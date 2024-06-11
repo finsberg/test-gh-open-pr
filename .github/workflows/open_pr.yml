@@ -3,16 +3,16 @@ on:
   push:
     branches: [main]
 
+permissions:
+  pull-requests: write
+  contents: write
+
 jobs:
   push_branch:
     uses: ./.github/workflows/push_branch.yml
     
   open_pr:
     needs: [push_branch]
-
-    permissions:
-      pull-requests: write
-      contents: write
 
     runs-on: ubuntu-latest
     steps:
