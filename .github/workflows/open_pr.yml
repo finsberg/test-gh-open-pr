@@ -8,8 +8,8 @@ jobs:
     uses: ./.github/workflows/push_branch.yml
     
   open_pr:
-      needs: [push_branch]
-
+    needs: [push_branch]
+    
     permissions:
       pull-requests: write
 
