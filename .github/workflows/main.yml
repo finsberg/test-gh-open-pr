@@ -1,0 +1,29 @@
+name: Scholar Bot
+on:
+  # push:
+  #   branches: [main]
+
+
+  # This workflow can be executed inside another workfow file
+  workflow_call:
+  workflow_dispatch:
+
+
+jobs:
+  scholar:
+    permissions:
+      contents: write
+
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - id: pygscholar
+      uses: add-publications/action@v1
+      with:
+        name: "Henrik Finsberg"
+        scholar_id: "NDPIHoEAAAAJ"
+    - run: echo title "$TITLE"
+      shell: bash
+      env:
+        TITLE: ${{ steps.pygscholar.outputs.title }}
+  
