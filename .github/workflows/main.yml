@@ -1,7 +1,7 @@
 name: Scholar Bot
 on:
-  # push:
-  #   branches: [main]
+  push:
+    branches: [main]
 
 
   # This workflow can be executed inside another workfow file
