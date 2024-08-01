@@ -18,31 +18,22 @@ inputs:
 outputs:
   has_new_publications:
     description: "Whether we have new publications"
-    required: true
   title:
     description: "Title of the new publication"
-    required: false
   authors:
     description: "Authors of the new publication"
-    required: false
   year:
     description: "Year of the new publication"
-    required: false
   date:
     description: "Date of the new publication"
-    required: false
   abstract:
     description: "Abstract of the new publication"
-    required: false
   journal:
     description: "Journal of the new publication"
-    required: false
   volume:
     description: "Volume of the new publication"
-    required: false
   pdf_url:
     description: "URL to the PDF of the new publication"
-    required: false
 
 
 runs:
