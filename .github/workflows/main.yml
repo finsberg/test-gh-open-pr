@@ -18,10 +18,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - id: pygscholar
-      uses: ./add-publications@v1
+      uses: ./add-publications
       with:
         name: "Henrik Finsberg"
         scholar_id: "NDPIHoEAAAAJ"
+        cache_dir: ".pygscholar"
     - run: echo title "$TITLE"
       shell: bash
       env:
