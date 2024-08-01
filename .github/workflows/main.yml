@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - id: pygscholar
-      uses: add-publications/action@v1
+      uses: ./add-publications/action@v1
       with:
         name: "Henrik Finsberg"
         scholar_id: "NDPIHoEAAAAJ"
