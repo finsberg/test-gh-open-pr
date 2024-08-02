@@ -107,6 +107,6 @@ runs:
     - name: Create pull request
       if: ${{ steps.has_new_publications.outputs.has_new_publications }}
       shell: bash
-      run: gh pr create -B main -H scholar-bot-update-$(date +%Y-%m-%d) --title 'Merge scholar-bot-update into main' --body 'Add new publication ${{ steps.has_new_publications.outputs.title }}'
+      run: gh pr create -B main -H scholar-bot-update-$(date +%Y-%m-%d) --title 'Merge scholar-bot-update into main' --body format('Add new publication {0}', ${{ steps.has_new_publications.outputs.title }})
       env:
         GITHUB_TOKEN: ${{ inputs.token }}

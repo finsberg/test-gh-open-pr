@@ -54,7 +54,7 @@ def main() -> int:
     url = data.get("pdf_url", "")
     authors = data.get("authors", "")
     abstract = data.get("abstract", "")
-    short_description = abstract.split(".")[0][:100]
+    short_description = abstract.split(".")[0]
     slug = "-".join(title.lower().replace(" ", "-")[:30].split("-")[:-1])
 
     content = template.format(
