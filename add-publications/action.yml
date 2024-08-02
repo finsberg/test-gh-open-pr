@@ -18,22 +18,24 @@ inputs:
 outputs:
   has_new_publications:
     description: "Whether we have new publications"
+    value: ${{ steps.has_new_publications.outputs.has_new_publications }}
   title:
     description: "Title of the new publication"
-  authors:
-    description: "Authors of the new publication"
-  year:
-    description: "Year of the new publication"
-  date:
-    description: "Date of the new publication"
-  abstract:
-    description: "Abstract of the new publication"
-  journal:
-    description: "Journal of the new publication"
-  volume:
-    description: "Volume of the new publication"
-  pdf_url:
-    description: "URL to the PDF of the new publication"
+    value: ${{ steps.has_new_publications.outputs.title }}
+  # authors:
+  #   description: "Authors of the new publication"
+  # year:
+  #   description: "Year of the new publication"
+  # date:
+  #   description: "Date of the new publication"
+  # abstract:
+  #   description: "Abstract of the new publication"
+  # journal:
+  #   description: "Journal of the new publication"
+  # volume:
+  #   description: "Volume of the new publication"
+  # pdf_url:
+  #   description: "URL to the PDF of the new publication"
 
 
 runs:
@@ -52,20 +54,14 @@ runs:
 q
     - name: Check if we have new publications
       shell: bash -el {0}
+      id: has_new_publications
       run: |
         export NEW_PUBS=$(python3 -c "import json; print(len(json.load(open('diff.json'))))")
         if [ $NEW_PUBS -gt 0 ]; then
-          echo "::set-output name=has_new_publications::true"
-          echo "::set-output name=title::$(python3 -c "import json; print(json.load(open('diff.json'))[0]['title'])")"
-          echo "::set-output name=authors::$(python3 -c "import json; print(json.load(open('diff.json'))[0]['authors'])")"
-          echo "::set-output name=year::$(python3 -c "import json; print(json.load(open('diff.json'))[0]['year'])")"
-          echo "::set-output name=date::$(python3 -c "import json; print(json.load(open('diff.json'))[0]['date'])")"
-          echo "::set-output name=abstract::$(python3 -c "import json; print(json.load(open('diff.json'))[0]['abstract'])")"
-          echo "::set-output name=journal::$(python3 -c "import json; print(json.load(open('diff.json'))[0]['journal'])")"
-          echo "::set-output name=volume::$(python3 -c "import json; print(json.load(open('diff.json'))[0]['volume'])")"
-          echo "::set-output name=pdf_url::$(python3 -c "import json; print(json.load(open('diff.json'))[0]['pdf_url'])")"
+          echo "has_new_publications=true" >> $GITHUB_OUTPUT
+          echo "title=$(python3 -c "import json; print(json.load(open('diff.json'))[0]['title'])")" >> $GITHUB_OUTPUT
         else
-          echo "::set-output name=has_new_publications::false"
+          echo "has_new_publications=false" >> $GITHUB_OUTPUT
         fi
 
   
