@@ -27,6 +27,8 @@ jobs:
         name: "Henrik Finsberg"
         scholar_id: "NDPIHoEAAAAJ"
         cache_dir: ".pygscholar"
+        working-directory: "."
+        token: ${{ secrets.GITHUB_TOKEN }}
     - run: echo title "$TITLE"
       shell: bash
       env:
