@@ -80,7 +80,7 @@ runs:
     - name: Create bibitem
       working-directory: ${{ inputs.working-directory }}
       shell: bash
-      run: python add_publications/create_bibitem.py diff.json ${{ inputs.bibdir }}
+      run: python add-publications/create_bibitem.py diff.json ${{ inputs.bibdir }}
 
     - name: Commit report
       working-directory: ${{ inputs.working-directory }}
