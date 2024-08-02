@@ -14,6 +14,10 @@ inputs:
     description: "Folder to store cache files"
     required: false
     default: ".pygscholar"
+  working-directory:
+    description: "Working directory"
+    required: false
+    default: "."
 
 outputs:
   has_new_publications:
@@ -42,20 +46,25 @@ runs:
   using: composite
   steps:
     - name: Install dependencies
+      working-directory: ${{ inputs.working-directory }}
       shell: bash -el {0}
       run: |
         python3 -m pip install --upgrade pip
         python3 -m pip install pygscholar
 
     - name: Get new publications
+      working-directory: ${{ inputs.working-directory }}
       shell: bash -el {0}
-      run: python3 -m pygscholar --overwrite --cache_dir ${{ inputs.cache_dir }} ${{ inputs.name }} --save-diff diff.json
+      run: python3 -m pygscholar --overwrite --cache_dir "${{ inputs.cache_dir }}" "${{ inputs.name }}" --save-diff "diff.json"
 q
-    - id: has_new_publications
+    - name: Check if we have new publications
+      working-directory: ${{ inputs.working-directory }}
+      id: has_new_publications
       shell: bash
       run: extract_pubs.sh
-
+  
     - name: Commit report
+      working-directory: ${{ inputs.working-directory }}
       if: ${{ steps.has_new_publications.outputs.has_new_publications }}
       shell: bash -el {0}
       run: |
