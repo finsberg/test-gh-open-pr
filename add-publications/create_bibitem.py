@@ -1,6 +1,7 @@
 from textwrap import dedent
 from pathlib import Path
 import argparse
+import datetime
 import json
 
 template = dedent(
@@ -45,6 +46,10 @@ def main() -> int:
 
     title = data.get("title", "")
     date = data.get("date", "")
+    if date == "":
+        # If the date is not provided, use the current date
+        date = datetime.datetime.now().strftime("%Y-%m-%d")
+    date = date.replace("/", "-")
     journal = data.get("journal", "")
     url = data.get("pdf_url", "")
     authors = data.get("authors", "")
@@ -62,7 +67,7 @@ def main() -> int:
         short_description=short_description,
         slug=slug,
     )
-    out_file = args.outdir / f"{slug}.md"
+    out_file = args.outdir / f"{date}-{slug}.md"
     out_file.write_text(content)
     print(f"File written to {out_file}")
 
