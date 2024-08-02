@@ -70,18 +70,17 @@ runs:
             echo "has_new_publications=false" >> $GITHUB_OUTPUT
         fi
 
-  
-#     - name: Commit report
-#       working-directory: ${{ inputs.working-directory }}
-#       if: ${{ steps.has_new_publications.outputs.has_new_publications }}
-#       shell: bash -el {0}
-#       run: |
-#         git config --global user.name 'SholarBot'
-#         git config --global user.email '
-#         git checkout -B scholar-bot-update
-#         git add ${{ inputs.cache_dir }}
-#         git commit -m "Update report"
-#         git push origin scholar-bot-update -f
+    - name: Commit report
+      working-directory: ${{ inputs.working-directory }}
+      if: ${{ steps.has_new_publications.outputs.has_new_publications }}
+      shell: bash
+      run: |
+        git config --global user.name 'SholarBot'
+        git config --global user.email '
+        git checkout -B scholar-bot-update-$(date +%Y-%m-%d)
+        git add ${{ inputs.cache_dir }}
+        git commit -m "Update report"
+        git push origin scholar-bot-update -f
 
 #     - name: Create pull request
 #       if: ${{ steps.has_new_publications.outputs.has_new_publications }}
