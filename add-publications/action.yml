@@ -47,15 +47,15 @@ runs:
   steps:
     - name: Install dependencies
       working-directory: ${{ inputs.working-directory }}
-      shell: bash -el {0}
+      shell: bash
       run: |
-        python3 -m pip install --upgrade pip
-        python3 -m pip install pygscholar
+        python -m pip install --upgrade pip
+        python -m pip install pygscholar
 
     - name: Get new publications
       working-directory: ${{ inputs.working-directory }}
-      shell: bash -el {0}
-      run: python3 -m pygscholar --overwrite --cache_dir "${{ inputs.cache_dir }}" "${{ inputs.name }}" --save-diff "diff.json"
+      shell: bash
+      run: python -m pygscholar --overwrite --cache_dir "${{ inputs.cache_dir }}" "${{ inputs.name }}" --save-diff "diff.json"
 q
     - name: Check if we have new publications
       working-directory: ${{ inputs.working-directory }}
