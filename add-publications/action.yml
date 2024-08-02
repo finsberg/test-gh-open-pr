@@ -76,13 +76,13 @@ runs:
         export NEW_PUBS=$(python -c "import json; print(len(json.load(open('diff.json'))))")
         if [ $NEW_PUBS -gt 0 ]; then
             echo "has_new_publications=true" >> $GITHUB_OUTPUT
-            echo "title=$(python -c "import json; print(json.load(open('diff.json'))[0].get('title', '')")" >> $GITHUB_OUTPUT
-            echo "authors=$(python -c "import json; print(json.load(open('diff.json'))[0].get('authors', '')")" >> $GITHUB_OUTPUT
-            echo "year=$(python -c "import json; print(json.load(open('diff.json'))[0].get('year', '')")" >> $GITHUB_OUTPUT
-            echo "date=$(python -c "import json; print(json.load(open('diff.json'))[0].get('date', '')")" >> $GITHUB_OUTPUT
-            echo "abstract=$(python -c "import json; print(json.load(open('diff.json'))[0].get('abstract', '')")" >> $GITHUB_OUTPUT
-            echo "journal=$(python -c "import json; print(json.load(open('diff.json'))[0].get('journal', '')")" >> $GITHUB_OUTPUT
-            echo "pdf_url=$(python -c "import json; print(json.load(open('diff.json'))[0].get('pdf_url', '')")" >> $GITHUB_OUTPUT          
+            echo "title=$(python -c "import json; print(json.load(open('diff.json'))[0].get('title', ''))")" >> $GITHUB_OUTPUT
+            echo "authors=$(python -c "import json; print(json.load(open('diff.json'))[0].get('authors', ''))")" >> $GITHUB_OUTPUT
+            echo "year=$(python -c "import json; print(json.load(open('diff.json'))[0].get('year', ''))")" >> $GITHUB_OUTPUT
+            echo "date=$(python -c "import json; print(json.load(open('diff.json'))[0].get('date', ''))")" >> $GITHUB_OUTPUT
+            echo "abstract=$(python -c "import json; print(json.load(open('diff.json'))[0].get('abstract', ''))")" >> $GITHUB_OUTPUT
+            echo "journal=$(python -c "import json; print(json.load(open('diff.json'))[0].get('journal', ''))")" >> $GITHUB_OUTPUT
+            echo "pdf_url=$(python -c "import json; print(json.load(open('diff.json'))[0].get('pdf_url', ''))")" >> $GITHUB_OUTPUT          
         else
             echo "has_new_publications=false" >> $GITHUB_OUTPUT
         fi
