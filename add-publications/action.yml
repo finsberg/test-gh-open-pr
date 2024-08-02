@@ -40,15 +40,18 @@ runs:
   using: composite
   steps:
     - name: Install dependencies
+      shell: bash -el {0}
       run: |
         python3 -m pip install --upgrade pip
         python3 -m pip install pygscholar
 
     - name: Get new publications
+      shell: bash -el {0}
       run: |
         python3 -m pygscholar --overwrite --cache_dir ${{ inputs.cache_dir }} ${{ inputs.name }} --save-diff diff.json
 q
     - name: Check if we have new publications
+      shell: bash -el {0}
       run: |
         export NEW_PUBS=$(python3 -c "import json; print(len(json.load(open('diff.json'))))")
         if [ $NEW_PUBS -gt 0 ]; then
@@ -68,6 +71,7 @@ q
   
     - name: Commit report
       if: ${{ steps.has_new_publications.outputs.has_new_publications }}
+      shell: bash -el {0}
       run: |
         git config --global user.name 'SholarBot'
         git config --global user.email '
@@ -78,6 +82,7 @@ q
 
     - name: Create pull request
       if: ${{ steps.has_new_publications.outputs.has_new_publications }}
+      shell: bash -el {0}
       run: |
         gh pr create -B main -H scholar-bot-update --title 'Merge scholar-bot-update into main' --body 'Created by Github action'
       env:
