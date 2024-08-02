@@ -55,15 +55,8 @@ q
     - name: Check if we have new publications
       id: has_new_publications
       shell: bash
-      run: |
-          export NEW_PUBS=$(python3 -c "import json; print(len(json.load(open('diff.json'))))")
-          if [ $NEW_PUBS -gt 0 ]; then
-            echo "has_new_publications=true" >> $GITHUB_OUTPUT
-            echo "title=$(python3 -c "import json; print(json.load(open('diff.json'))[0]['title'])")" >> $GITHUB_OUTPUT
-          else
-            echo "has_new_publications=false" >> $GITHUB_OUTPUT
-          fi
-
+      run: extract_pubs.sh
+          
   
     - name: Commit report
       if: ${{ steps.has_new_publications.outputs.has_new_publications }}
