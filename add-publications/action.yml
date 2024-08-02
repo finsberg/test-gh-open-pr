@@ -79,7 +79,6 @@ runs:
 
     - name: Create bibitem
       working-directory: ${{ inputs.working-directory }}
-      id: has_new_publications
       shell: bash
       run: python add_publications/create_bibitem.py diff.json ${{ inputs.bibdir }}
 
