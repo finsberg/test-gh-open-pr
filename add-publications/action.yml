@@ -55,13 +55,13 @@ runs:
     - name: Get new publications
       working-directory: ${{ inputs.working-directory }}
       shell: bash
-      run: scholar list-new-author-publications --overwrite --cache_dir "${{ inputs.cache_dir }}" "${{ inputs.name }}" --save-diff "diff.json"
+      run: scholar list-new-author-publications --overwrite --cache-dir "${{ inputs.cache_dir }}" "${{ inputs.name }}" --save-diff "diff.json"
 
-#     - name: Check if we have new publications
-#       working-directory: ${{ inputs.working-directory }}
-#       id: has_new_publications
-#       shell: bash
-#       run: extract_pubs.sh
+    # - name: Check if we have new publications
+    #   working-directory: ${{ inputs.working-directory }}
+    #   id: has_new_publications
+    #   shell: bash
+    #   run: extract_pubs.sh
   
 #     - name: Commit report
 #       working-directory: ${{ inputs.working-directory }}
