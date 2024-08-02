@@ -52,33 +52,33 @@ runs:
         python -m pip install --upgrade pip
         python -m pip install pygscholar
 
-    - name: Get new publications
-      working-directory: ${{ inputs.working-directory }}
-      shell: bash
-      run: python -m pygscholar --overwrite --cache_dir "${{ inputs.cache_dir }}" "${{ inputs.name }}" --save-diff "diff.json"
-q
-    - name: Check if we have new publications
-      working-directory: ${{ inputs.working-directory }}
-      id: has_new_publications
-      shell: bash
-      run: extract_pubs.sh
+#     - name: Get new publications
+#       working-directory: ${{ inputs.working-directory }}
+#       shell: bash
+#       run: python -m pygscholar --overwrite --cache_dir "${{ inputs.cache_dir }}" "${{ inputs.name }}" --save-diff "diff.json"
+# q
+#     - name: Check if we have new publications
+#       working-directory: ${{ inputs.working-directory }}
+#       id: has_new_publications
+#       shell: bash
+#       run: extract_pubs.sh
   
-    - name: Commit report
-      working-directory: ${{ inputs.working-directory }}
-      if: ${{ steps.has_new_publications.outputs.has_new_publications }}
-      shell: bash -el {0}
-      run: |
-        git config --global user.name 'SholarBot'
-        git config --global user.email '
-        git checkout -B scholar-bot-update
-        git add ${{ inputs.cache_dir }}
-        git commit -m "Update report"
-        git push origin scholar-bot-update -f
+#     - name: Commit report
+#       working-directory: ${{ inputs.working-directory }}
+#       if: ${{ steps.has_new_publications.outputs.has_new_publications }}
+#       shell: bash -el {0}
+#       run: |
+#         git config --global user.name 'SholarBot'
+#         git config --global user.email '
+#         git checkout -B scholar-bot-update
+#         git add ${{ inputs.cache_dir }}
+#         git commit -m "Update report"
+#         git push origin scholar-bot-update -f
 
-    - name: Create pull request
-      if: ${{ steps.has_new_publications.outputs.has_new_publications }}
-      shell: bash -el {0}
-      run: |
-        gh pr create -B main -H scholar-bot-update --title 'Merge scholar-bot-update into main' --body 'Created by Github action'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#     - name: Create pull request
+#       if: ${{ steps.has_new_publications.outputs.has_new_publications }}
+#       shell: bash -el {0}
+#       run: |
+#         gh pr create -B main -H scholar-bot-update --title 'Merge scholar-bot-update into main' --body 'Created by Github action'
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
