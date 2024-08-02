@@ -10,7 +10,7 @@ inputs:
     description: "Google Scholar ID"
     required: true
     default: "NDPIHoEAAAAJ"  # Henrik Finsberg
-  cache_dire:
+  cache_dir:
     description: "Folder to store cache files"
     required: false
     default: ".pygscholar"
@@ -52,11 +52,11 @@ runs:
         python -m pip install --upgrade pip
         python -m pip install pygscholar
 
-#     - name: Get new publications
-#       working-directory: ${{ inputs.working-directory }}
-#       shell: bash
-#       run: python -m pygscholar --overwrite --cache_dir "${{ inputs.cache_dir }}" "${{ inputs.name }}" --save-diff "diff.json"
-# q
+    - name: Get new publications
+      working-directory: ${{ inputs.working-directory }}
+      shell: bash
+      run: scholar --overwrite --cache_dir "${{ inputs.cache_dir }}" "${{ inputs.name }}" --save-diff "diff.json"
+
 #     - name: Check if we have new publications
 #       working-directory: ${{ inputs.working-directory }}
 #       id: has_new_publications
