@@ -51,8 +51,7 @@ runs:
       shell: bash -el {0}
       run: python3 -m pygscholar --overwrite --cache_dir ${{ inputs.cache_dir }} ${{ inputs.name }} --save-diff diff.json
 q
-    - name: Check if we have new publications
-      id: has_new_publications
+    - id: has_new_publications
       shell: bash
       run: extract_pubs.sh
 
