@@ -88,14 +88,14 @@ runs:
         fi
 
     - name: Create bibitem
-      if: ${{ steps.has_new_publications.outputs.has_new_publications }}
       working-directory: ${{ inputs.working-directory }}
+      if: ${{ steps.has_new_publications.outputs.has_new_publications == 'true' }}
       shell: bash
       run: python add-publications/create_bibitem.py diff.json ${{ inputs.bibdir }}
 
     - name: Commit report
       working-directory: ${{ inputs.working-directory }}
-      if: ${{ steps.has_new_publications.outputs.has_new_publications }}
+      if: ${{ steps.has_new_publications.outputs.has_new_publications == 'true' }}
       shell: bash
       run: |
         git config --global user.name 'SholarBot'
@@ -106,7 +106,7 @@ runs:
         git push origin scholar-bot-update-$(date +%Y-%m-%d) -f
 
     - name: Create pull request
-      if: ${{ steps.has_new_publications.outputs.has_new_publications }}
+      if: ${{ steps.has_new_publications.outputs.has_new_publications == 'true' }}
       shell: bash
       run: |
         python add-publications/create_pr_body.py diff.json > msg
