@@ -109,6 +109,6 @@ runs:
       shell: bash
       run: |
         export PR_BODY=$(python add-publications/create_pr_body.py diff.json)
-        gh pr create -B main -H scholar-bot-update-$(date +%Y-%m-%d) --title 'Merge scholar-bot-update into main' --body $PR_BODY
+        gh pr create -B main -H scholar-bot-update-$(date +%Y-%m-%d) --title 'Merge scholar-bot-update into main' --body '$PR_BODY'
       env:
         GITHUB_TOKEN: ${{ inputs.token }}
