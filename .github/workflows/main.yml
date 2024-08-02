@@ -30,6 +30,7 @@ jobs:
         cache_dir: ".pygscholar"
         working-directory: "."
         token: ${{ secrets.GITHUB_TOKEN }}
+        bibdir: "_publications"
     - run: echo title "$TITLE"
       shell: bash
       env:

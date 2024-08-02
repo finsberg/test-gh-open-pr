@@ -10,6 +10,10 @@ inputs:
     description: "Google Scholar ID"
     required: true
     default: "NDPIHoEAAAAJ"  # Henrik Finsberg
+  bibdir:
+    description: "Directory to store bib item files"
+    required: false
+    default: "_publications"
   cache_dir:
     description: "Folder to store cache files"
     required: false
@@ -73,6 +77,12 @@ runs:
             echo "has_new_publications=false" >> $GITHUB_OUTPUT
         fi
 
+    - name: Create bibitem
+      working-directory: ${{ inputs.working-directory }}
+      id: has_new_publications
+      shell: bash
+      run: python add_publications/create_bibitem.py diff.json ${{ inputs.bibdir }}
+
     - name: Commit report
       working-directory: ${{ inputs.working-directory }}
       if: ${{ steps.has_new_publications.outputs.has_new_publications }}
@@ -81,13 +91,13 @@ runs:
         git config --global user.name 'SholarBot'
         git config --global user.email 'scholarbot@users.noreply.github.com'
         git checkout -B scholar-bot-update-$(date +%Y-%m-%d)
-        git add ${{ inputs.cache_dir }}
+        git add ${{ inputs.cache_dir }} ${{ inputs.bibdir }}
         git commit -m "Update report"
         git push origin scholar-bot-update-$(date +%Y-%m-%d) -f
 
     - name: Create pull request
       if: ${{ steps.has_new_publications.outputs.has_new_publications }}
       shell: bash
-      run: gh pr create -B main -H scholar-bot-update-$(date +%Y-%m-%d) --title 'Merge scholar-bot-update-$(date +%Y-%m-%d) into main' --body 'Created by Github action'
+      run: gh pr create -B main -H scholar-bot-update-$(date +%Y-%m-%d) --title 'Merge scholar-bot-update into main' --body 'Created by Github action'
       env:
         GITHUB_TOKEN: ${{ inputs.token }}
