@@ -55,7 +55,7 @@ runs:
     - name: Get new publications
       working-directory: ${{ inputs.working-directory }}
       shell: bash
-      run: scholar --overwrite --cache_dir "${{ inputs.cache_dir }}" "${{ inputs.name }}" --save-diff "diff.json"
+      run: scholar list-new-author-publications --overwrite --cache_dir "${{ inputs.cache_dir }}" "${{ inputs.name }}" --save-diff "diff.json"
 
 #     - name: Check if we have new publications
 #       working-directory: ${{ inputs.working-directory }}
