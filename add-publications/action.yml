@@ -53,8 +53,8 @@ runs:
         python3 -m pygscholar --overwrite --cache_dir ${{ inputs.cache_dir }} ${{ inputs.name }} --save-diff diff.json
 q
     - name: Check if we have new publications
-      shell: bash -el {0}
       id: has_new_publications
+      shell: bash
       run: |
         export NEW_PUBS=$(python3 -c "import json; print(len(json.load(open('diff.json'))))")
         if [ $NEW_PUBS -gt 0 ]; then
