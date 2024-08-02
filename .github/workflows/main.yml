@@ -8,6 +8,10 @@ on:
   workflow_call:
   workflow_dispatch:
 
+permissions:
+  pull-requests: write
+  contents: write
+
 
 jobs:
   scholar:
