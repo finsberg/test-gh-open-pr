@@ -19,7 +19,7 @@ jobs:
       with:
         python-version: 3.11
     - id: pygscholar
-      uses: finsberg/actions/add-publications
+      uses: finsberg/add-publications@main
       with:
         name: "Henrik Finsberg"
         scholar_id: "NDPIHoEAAAAJ"
