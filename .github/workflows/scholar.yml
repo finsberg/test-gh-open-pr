@@ -1,9 +1,8 @@
 name: Scholar Bot
 on:
 
-  # This workflow can be executed inside another workfow file
-  workflow_call:
-  workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *" # 
 
 
 jobs:
@@ -20,7 +19,7 @@ jobs:
       with:
         python-version: 3.11
     - id: pygscholar
-      uses: ./add-publications
+      uses: finsberg/actions/add-publications
       with:
         name: "Henrik Finsberg"
         scholar_id: "NDPIHoEAAAAJ"
